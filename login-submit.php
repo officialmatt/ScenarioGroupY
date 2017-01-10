@@ -21,9 +21,9 @@ else {
 function is_correct_password($name, $pw) {
 	$db = new PDO("mysql:dbname=simpsons", "root", "");
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$rows = $db->query("SELECT password, isAdmin FROM students WHERE name = '$name'");
+	$rows = $db->query("SELECT pwd, isAdmin FROM students WHERE name = '$name'");
 	foreach ($rows as $row) {
-		$correct_password = $row["password"];
+		$correct_password = $row["pwd"];
 		$isAdmin = $row["isAdmin"];
 
 		if ($pw == $correct_password && $isAdmin == '1') {

@@ -11,37 +11,30 @@ changePassword($oldPW, $newPW, $name);
 
 # query database to see if user typed the right password
 function changePassword($oldPW, $newPW, $name) {
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "simpsons";
+	$db = new PDO("mysql:dbname=simpsons", "root", "");
 
-	// Create connection
-	$conn = new mysqli($servername, $username, $password, $dbname);
-	// Check connection
-	if ($conn->connect_error) {
-	    die("Connection failed: " . $conn->connect_error);
+
+	$rows = $db->query("SELECT * FROM students WHERE name = 'Bart'");
+	foreach ($rows as $row) {
+
+	$realOldPw= $row["pwd"];
+
 	}
 
-	$sql = "SELECT password FROM students WHERE name = '$name'";
-	$result = $conn->query($sql);
-
-	print $result;
-	$conn->close();
-
-	if ($result == $oldPW)
+	if ($realOldPw == $oldPW)
 	{
-		print $result;
-		print $oldPW;
 
-		print "Password the same";
+		$count = $db->exec("UPDATE students SET pwd= '$newPW'  WHERE name='$name'");
+		print "Password changed!";
+		header( "refresh:2;url=grades.php" );
 
 	}
 
 	else {
-		print "Passwords different";
-		print $result;
-		print $oldPW;
+		print "Passwords do not match, please try again!";
+		header( "refresh:2;url=grades.php" );
+
+		//print $row;
 	}
 
 }
