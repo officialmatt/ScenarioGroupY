@@ -8,17 +8,19 @@
 	-->
 	<head>
 		<title>Springfield Elementary School</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link href="simpsons.css" type="text/css" rel="stylesheet" />
 	</head>
 
 	<body>
 		<div id="logoarea">
-			<img src="simpsons.png" alt="logo" />
+			<!-- <img src="simpsons.png" alt="logo" /> -->
 		</div>
 
-		<h1>Springfield Elementary Web Site</h1>
+		<h1>Your Blogs - Log In</h1>
 
-		<h2>Log In</h2>
 
 		<form id="login" action="login-submit.php" method="post">
 			<fieldset>

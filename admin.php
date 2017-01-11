@@ -11,10 +11,8 @@
 
 	<body>
 		<div id="logoarea">
-			<img src="simpsons.png" alt="logo" />
+			<!-- <img src="simpsons.png" alt="logo" /> -->
 		</div>
-
-		<h1>Springfield Elementary Web Site - Admin Page</h1>
 
 
 		<table>
@@ -24,8 +22,9 @@
 			session_start();
 			$name = $_SESSION["name"];
 			?>
-			<h2>Hello <? print $name; ?> </h2>
+			<h1>Hello, <? print $name; ?> - Admin Page </h1>
 
+			<div class="buttons" >
 			<a href = "start.php" > <button type="button" class="btn btn-info btn-lg">Log Out</button> </a>
 			<?
 			$query = "SELECT *
@@ -82,5 +81,9 @@
 			?>
 
 		</table>
+	</div>
+
+
+
 	</body>
 </html>

@@ -2,7 +2,7 @@
 $name = $_POST["name"];
 $email = $_POST["email"];
 $pw = $_POST["password"];
-$id= 872;
+$id= 67;
 
 
 sign_up($name,$email,$pw, $id);
@@ -16,14 +16,29 @@ function sign_up($name,$email, $pw, $id) {
 	//$db->query("INSERT INTO students VALUES (777, $name, $email, $pw)");
 
   // prepare sql and bind parameters
-  $stmt = $db->prepare("INSERT INTO students (id, name, email, pwd)
-  VALUES (:id, :name, :email, :pwd)");
-  $stmt->bindParam(':id', $id);
+  $stmt = $db->prepare("INSERT INTO students (name, email, pwd)
+  VALUES ( :name, :email, :pwd)");
+  //$stmt->bindParam(':id', $id);
   $stmt->bindParam(':name', $name);
   $stmt->bindParam(':email', $email);
-  $stmt->bindParam(':pwd', $pwd);
+  $stmt->bindParam(':pwd', $pw);
 
-  $stmt->execute();
+
+
+
+	try {
+   $stmt->execute();
+   // do other things if successfully inserted
+} catch (PDOException $e) {
+   if ($e->errorInfo[1] == 1062) {
+      // duplicate entry, do something else
+			print "Please choose a unique username!";
+			header( "refresh:2;url=signup.php" );
+
+   }
+}
+
+
 
 
   }

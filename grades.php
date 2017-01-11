@@ -11,10 +11,9 @@
 
 	<body>
 		<div id="logoarea">
-			<img src="simpsons.png" alt="logo" />
+			<!-- <img src="simpsons.png" alt="logo" /> -->
 		</div>
 
-		<h1>Springfield Elementary Web Site</h1>
 
 
 
@@ -24,9 +23,9 @@
 			$name = $_SESSION["name"];
 			?>
 
-			<h2>Hello <? print $name; ?> </h2>
+			<h1>Hello, <? print $name; ?>. </h1>
 			<br>
-
+			<div class = "buttons" >
 			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Change Password</button>
 
 
@@ -106,64 +105,51 @@
 
 			<table>
 				<tr><th>Snippets</th></tr>
-
 				<?
-				$query = "SELECT *
-				          FROM students";
 				$db = new PDO("mysql:dbname=simpsons", "root", "");
 				$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				$rows = $db->query($query);
+				$rows = $db->query("SELECT id FROM students WHERE name = '$name'");
 				foreach ($rows as $row) {
-					?>
+					$userID = $row["id"];
 
-					<tr>
+					}
+				 ?>
+
+				 <?
+	 			$query = "SELECT snippet, snippet_id from snippets WHERE snippets.user_id = $userID";
+	 			$db = new PDO("mysql:dbname=simpsons", "root", "");
+	 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	 			$rows = $db->query($query);
+	 			foreach ($rows as $row) {
+	 				?>
+	 				<tr>
+
+
+	 					<td>
+	 						<?= $row["snippet"] ?>
+	 					</td>
+
 						<td>
-							<?= $row["id"] ?>
-						</td>
+							<form id="deleteSnippet" action="delete_snippet.php" method="post" >
+								<fieldset>
+									<input type="hidden" name="snippet_id" value="<?php echo $row["snippet_id"]; ?>">
+									<input type="hidden" name="name" value="<?php echo $row['name']; ?>">
 
-						<td>
-							<?= $row["name"] ?>
-						</td>
 
-					<td>
-						<?= $row["email"] ?>
-					</td>
+									<input type="submit" value="Delete" />
+								</fieldset>
+							</form>
 
-					<td>
-						<?= $row["pwd"] ?>
-					</td>
-
-				<td>
-					<?= $row["isAdmin"] ?>
-				</td>
-
-				<td>
-
-					<form id="editInfo" action="edit_info.php" method="post" >
-						<fieldset>
-							<input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
-							<input type="hidden" name="name" value="<?php echo $row['name']; ?>">
-							<input type="hidden" name="email" value="<?php echo $row['email']; ?>">
-							<input type="hidden" name="pwd" value="<?php echo $row['pwd']; ?>">
-							<input type="hidden" name="isAdmin" value="<?php echo $row['isAdmin']; ?>">
-
-							<input type="submit" value="Edit" />
-						</fieldset>
-					</form>
+	 					</td>
 
 
 
+	 		</tr>
+	 		<?php
+	 	}
+	 	?>
 
-				</td>
-			</tr>
-
-					<?php
-				}
-				?>
-
-			</table>
-
-
+	</table> </div>
 
 
 	</body>
