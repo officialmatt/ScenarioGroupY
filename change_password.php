@@ -26,7 +26,7 @@ function changePassword($oldPW, $newPW, $name) {
 
 		$count = $db->exec("UPDATE students SET pwd= '$newPW'  WHERE name='$name'");
 		print "Password changed!";
-		header( "refresh:2;url=grades.php" );
+		header( "refresh:1;url=grades.php" );
 
 	}
 

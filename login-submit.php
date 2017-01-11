@@ -11,7 +11,10 @@ if (is_correct_password($name, $pw) == 2) {
 }
 elseif (is_correct_password($name, $pw)== 1)
 {
-	print "YOU ARE AN ADMIN";
+	session_start();
+	$_SESSION["name"] = $name;
+	header("Location: admin.php");
+	die();
 }
 else {
 	print "--,.--;;;;;;;;;";

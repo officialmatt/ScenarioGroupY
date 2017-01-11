@@ -2,10 +2,12 @@
 $name = $_POST["name"];
 $email = $_POST["email"];
 $pw = $_POST["password"];
-$id= 333;
+$id= 872;
 
 
 sign_up($name,$email,$pw, $id);
+header( "refresh:2;url=start.php" );
+
 
 # query database to see if user typed the right password
 function sign_up($name,$email, $pw, $id) {
@@ -19,9 +21,10 @@ function sign_up($name,$email, $pw, $id) {
   $stmt->bindParam(':id', $id);
   $stmt->bindParam(':name', $name);
   $stmt->bindParam(':email', $email);
-  $stmt->bindParam(':pwd', $pw);
+  $stmt->bindParam(':pwd', $pwd);
 
   $stmt->execute();
+
 
   }
 ?>
