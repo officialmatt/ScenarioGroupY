@@ -49,7 +49,14 @@ function checkEqual($pw, $pwConf)
 		return True;
 	}
 }
-# query database to see if user typed the right password
+
+function hashPass($pass) {
+	//$input=iconv('UTF-8','UTF-16LE',$pass);
+	$hashedPass=bin2hex(mhash(MHASH_MD4,$pass));
+	echo $hashedPass;
+	return $hashedPass;
+}
+
 function sign_up($name,$email, $pw, $id) {
 	$db = new PDO("mysql:dbname=simpsons", "root", "");
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -61,9 +68,9 @@ function sign_up($name,$email, $pw, $id) {
   //$stmt->bindParam(':id', $id);
   $stmt->bindParam(':name', $name);
   $stmt->bindParam(':email', $email);
-//	$pw1 = password_hash($pw, PASSWORD_DEFAULT);
+	$pw1 = hashPass($pw);
 
-  $stmt->bindParam(':pwd', $pw);
+  $stmt->bindParam(':pwd', $pw1);
 
 
 
