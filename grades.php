@@ -10,10 +10,30 @@
 	</head>
 
 	<body>
-		<div id="logoarea">
-			<!-- <img src="simpsons.png" alt="logo" /> -->
-		</div>
+		<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="start.php">Blog Post</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
 
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="login.php">Log In</a></li>
+            <li><a href="signup.php">Sign Up</a></li>
+						<li><a href="start.php">Log Out</a></li>
+
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
 
 
 
@@ -22,7 +42,7 @@
 			session_start();
 			$name = $_SESSION["name"];
 			?>
-
+			<div class = "jumbotron" >
 			<h1>Hello, <? print $name; ?>. </h1>
 			<br>
 			<div class = "buttons" >
@@ -102,9 +122,10 @@
 			  </div>
 			</div>
 
+			<div class="table1">
 
-			<table>
-				<tr><th>Snippets</th></tr>
+			<table class="table table-hover">
+				<tr><th>Snippets</th> <th>Delete Snippet</th></tr>
 				<?
 				$db = new PDO("mysql:dbname=simpsons", "root", "");
 				$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -149,7 +170,8 @@
 	 	}
 	 	?>
 
-	</table> </div>
+	</table> </div> </div>
+</div>
 
 
 	</body>

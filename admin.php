@@ -10,12 +10,35 @@
 	</head>
 
 	<body>
-		<div id="logoarea">
-			<!-- <img src="simpsons.png" alt="logo" /> -->
-		</div>
+		<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="start.php">Blog Post</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="login.php">Log In</a></li>
+            <li><a href="signup.php">Sign Up</a></li>
+						<li><a href="start.php">Log Out</a></li>
+
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
 
 
-		<table>
+		<div class = "jumbotron" >
+			<div class = "table1" >
+		<table class="table table-hover">
 			<tr><th>ID</th><th>Name</th><th>Email</th><th>Password</th><th>Admin?</th><th>Edit</th></tr>
 
 			<?php
@@ -23,9 +46,9 @@
 			$name = $_SESSION["name"];
 			?>
 			<h1>Hello, <? print $name; ?> - Admin Page </h1>
+			<h2> System Users </h2>
 
-			<div class="buttons" >
-			<a href = "start.php" > <button type="button" class="btn btn-info btn-lg">Log Out</button> </a>
+
 			<?
 			$query = "SELECT *
 			          FROM students";
@@ -82,6 +105,7 @@
 
 		</table>
 	</div>
+</div>
 
 
 
