@@ -17,8 +17,12 @@ elseif (is_correct_password($name, $pw)== 1)
 	die();
 }
 else {
-	print "--,.--;;;;;;;;;";
+	print "Incorrect Password!";
+	header( "refresh:2;url=start.php" );
+
+
 }
+
 
 # query database to see if user typed the right password
 function is_correct_password($name, $pw) {

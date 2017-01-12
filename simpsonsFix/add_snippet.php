@@ -6,10 +6,10 @@ $snippet = $_POST["snippet"];
 $userid= 872;
 $isPrivate= 0;
 
+$newstr = filter_var($snippet, FILTER_SANITIZE_STRING);
 
+add_snippet($newstr,$userid,$isPrivate,$name);
 
-
-add_snippet($snippet,$userid,$isPrivate,$name);
 header( "refresh:2;url=grades.php" );
 
 
