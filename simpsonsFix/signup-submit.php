@@ -53,7 +53,6 @@ function checkEqual($pw, $pwConf)
 function hashPass($pass) {
 	//$input=iconv('UTF-8','UTF-16LE',$pass);
 	$hashedPass=bin2hex(mhash(MHASH_MD4,$pass));
-	echo $hashedPass;
 	return $hashedPass;
 }
 
@@ -61,16 +60,17 @@ function sign_up($name,$email, $pw, $id) {
 	$db = new PDO("mysql:dbname=simpsons", "root", "");
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	//$db->query("INSERT INTO students VALUES (777, $name, $email, $pw)");
-
+	$salt = mcrypt_create_iv(8);
+	//echo $salt;
+	$pw1 = hashPass($pw);
   // prepare sql and bind parameters
-  $stmt = $db->prepare("INSERT INTO students (name, email, pwd)
+  $stmt = $db->prepare("INSERT INTO students (name, email, pwd, salt)
   VALUES ( :name, :email, :pwd)");
   //$stmt->bindParam(':id', $id);
   $stmt->bindParam(':name', $name);
   $stmt->bindParam(':email', $email);
-	$pw1 = hashPass($pw);
-
   $stmt->bindParam(':pwd', $pw1);
+	$stmt->bindParam(':salt', $salt);
 
 
 
