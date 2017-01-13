@@ -32,10 +32,10 @@ function hashPass($pass) {
 function is_correct_password($name, $pw) {
 	$db = new PDO("mysql:dbname=simpsons", "root", "");
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$rows = $db->query("SELECT pwd, isAdmin FROM students WHERE name = '$name'");
+	$rows = $db->query("SELECT pwd, salt, isAdmin FROM students WHERE name = '$name'");
 	foreach ($rows as $row) {
 		$correct_password = $row["pwd"];
-		$hashedPw = hashPass($pw);
+		$hashedPw = hashPass($pw . $row["salt"]);
 		$isAdmin = $row["isAdmin"];
 
 		if ($hashedPw == $correct_password && $isAdmin == '1') {

@@ -85,5 +85,10 @@
 	</div>
 
 	</div>
+	<div>
+		<form id="search" action="search-submit.php" method="post">
+			<input type="text" name="search">
+		</form>
+	</div>
 	</body>
 </html>
