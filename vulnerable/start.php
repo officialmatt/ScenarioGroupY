@@ -58,7 +58,7 @@
 			<tr><th>Username</th><th>Snippet</th><th>Date Added</th></tr>
 
 			<?
-			$query = "SELECT u.name, s.snippet, s.dateTime FROM students AS u JOIN snippets AS s ON u.id=s.user_id GROUP BY u.name";
+			$query = "SELECT u.name, s.snippet, s.dateTime, s.isPrivate FROM students AS u JOIN snippets AS s ON u.id=s.user_id AND s.isPrivate = 1 GROUP BY u.name";
 			$db = new PDO("mysql:dbname=simpsons", "root","");
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$rows = $db->query($query);
@@ -82,8 +82,18 @@
 	?>
 		</table>
 	</div>
+	<br>
+	<h2> Search Snippets </h2>
+	<br>
+
+	<div class = "search" id = "search">
+		<form id="search" action="search-submit.php" method="post">
+			<input type="text" name="search" value="Enter Search">
+		</form>
+	</div>
 	</div>
 
 	</div>
+
 	</body>
 </html>

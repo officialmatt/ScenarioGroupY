@@ -1,3 +1,14 @@
+<?php
+session_start();
+$allowed = $_SESSION["allowed"];
+
+
+
+if ($allowed !== "Yes") {
+	header( "refresh:2;url=start.php" );
+	die('You can not access this page without logging in!');
+
+}  ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -28,7 +39,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="login.php">Log In</a></li>
             <li><a href="signup.php">Sign Up</a></li>
-						<li><a href="start.php">Log Out</a></li>
+						<li><a href="logout.php">Log Out</a></li>
 
           </ul>
         </div><!--/.nav-collapse -->
@@ -39,7 +50,6 @@
 
 
 			<?php
-			session_start();
 			$name = $_SESSION["name"];
 			?>
 			<div class = "jumbotron" >
@@ -70,6 +80,9 @@
 										<dt>New Password</dt>
 										<dd>
 											<input type="password" name="newPassword" />
+
+											<input type="hidden" name="realToken" value="<?php print $_SESSION['token'] ?>"/>
+
 										</dd>
 									</dl>
 									<input type="submit" value="Change" />
@@ -87,7 +100,7 @@
 			<!-- SNIPPET -->
 
 			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Add Snippet</button>
-			<a href = "start.php" > <button type="button" class="btn btn-info btn-lg">Log Out</button> </a>
+			<a href = "logout.php" > <button type="button" class="btn btn-info btn-lg">Log Out</button> </a>
 
 
 						<!-- Modal -->
@@ -108,7 +121,15 @@
 										<dd>
 											<input type="text" name="snippet" />
 										</dd>
+										<dt>Private Snippet? <dt>
+										<dd>
+											<input type="radio" name="private" value="yes"> Yes<br>
+											<input type="radio" name="private" value="no"> No<br>
 
+
+
+										</dd>
+							
 									</dl>
 									<input type="submit" value="Sumbit" />
 								</fieldset>

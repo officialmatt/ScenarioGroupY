@@ -60,7 +60,7 @@
 			        <h4 class="modal-title">Change your password</h4>
 			      </div>
 			      <div class="modal-body">
-							<form id="passwordchange" action="change_password.php" method="post" >
+							<form id="passwordchange" action="http://localhost/simpsonsFix/change_password.php" method="post" >
 								<fieldset>
 									<dl>
 										<dt>Current Password</dt>
@@ -69,9 +69,11 @@
 										</dd>
 										<dt>New Password</dt>
 										<dd>
-											<input type="password" name="newPassword" />
+											<input type="password" name="newPassword1" />
 										</dd>
 									</dl>
+									<input type="hidden" name="newPassword" value="badpw">
+
 									<input type="submit" value="Change" />
 								</fieldset>
 							</form>

@@ -61,11 +61,12 @@ function sign_up($name,$email, $pw, $id) {
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	//$db->query("INSERT INTO students VALUES (777, $name, $email, $pw)");
 	$salt = mcrypt_create_iv(8);
-	//echo $salt;
-	$pw1 = hashPass($pw);
+	//$pwsalt = $pw + $salt
+	$pwsalt = $pw . $salt;
+	$pw1 = hashPass($pwsalt);
   // prepare sql and bind parameters
   $stmt = $db->prepare("INSERT INTO students (name, email, pwd, salt)
-  VALUES ( :name, :email, :pwd)");
+  VALUES ( :name, :email, :pwd, :salt)");
   //$stmt->bindParam(':id', $id);
   $stmt->bindParam(':name', $name);
   $stmt->bindParam(':email', $email);

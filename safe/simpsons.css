@@ -103,6 +103,20 @@ input[type=submit] {
     cursor: pointer;
 }
 
+#search input[type=text] {
+  width: 50%;
+  padding: 10px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.search {
+  padding-left: 330px;
+}
+
 
 input[type=submit]:hover {
     background-color: #45a049;

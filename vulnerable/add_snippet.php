@@ -2,14 +2,25 @@
 session_start();
 $name = $_SESSION["name"];
 $snippet = $_POST["snippet"];
+$private = $_POST["private"];
+
+
 
 $userid= 872;
-$isPrivate= 0;
 
-$newstr = filter_var($snippet, FILTER_SANITIZE_STRING);
+if ($private=="yes"){
+	$isPrivate= 0;
 
-add_snippet($newstr,$userid,$isPrivate,$name);
+}
+else {
+	$isPrivate= 1;
 
+}
+
+
+
+
+add_snippet($snippet,$userid,$isPrivate,$name);
 header( "refresh:2;url=grades.php" );
 
 
